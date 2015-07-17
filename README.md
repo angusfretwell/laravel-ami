@@ -1,2 +1,2 @@
-# Journeyman
-A robust Vagrant base box for PHP projects (WIP)
+# Laravel AMI
+A AMI for Laravel projects based on Homestead provisioning scripts
