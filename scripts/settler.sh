@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 
-# Update Package List
+export DEBIAN_FRONTEND="noninteractive"
 
+# Update Package List
 apt-get update
 
 # Update System Packages
@@ -11,6 +12,12 @@ apt-get -y upgrade
 
 echo "LC_ALL=en_US.UTF-8" >> /etc/default/locale
 locale-gen en_US.UTF-8
+
+# Enable Swap Memory
+
+/bin/dd if=/dev/zero of=/var/swap.1 bs=1M count=1024
+/sbin/mkswap /var/swap.1
+/sbin/swapon /var/swap.1
 
 # Install Some PPAs
 
@@ -67,11 +74,11 @@ mv composer.phar /usr/local/bin/composer
 
 # Add Composer Global Bin To Path
 
-printf "\nPATH=\"/home/vagrant/.composer/vendor/bin:\$PATH\"\n" | tee -a /home/vagrant/.profile
+printf "\nPATH=\"/home/ubuntu/.composer/vendor/bin:\$PATH\"\n" | tee -a /home/ubuntu/.profile
 
 # Install Laravel Envoy
 
-sudo su vagrant <<'EOF'
+sudo su ubuntu <<'EOF'
 /usr/local/bin/composer global require "laravel/envoy=~1.0"
 EOF
 
@@ -100,7 +107,7 @@ apt-get install -y hhvm
 # Configure HHVM To Run As Homestead
 
 service hhvm stop
-sed -i 's/#RUN_AS_USER="www-data"/RUN_AS_USER="vagrant"/' /etc/default/hhvm
+sed -i 's/#RUN_AS_USER="www-data"/RUN_AS_USER="ubuntu"/' /etc/default/hhvm
 service hhvm start
 
 # Start HHVM On System Start
@@ -150,14 +157,14 @@ EOF
 
 # Set The Nginx & PHP-FPM User
 
-sed -i "s/user www-data;/user vagrant;/" /etc/nginx/nginx.conf
+sed -i "s/user www-data;/user ubuntu;/" /etc/nginx/nginx.conf
 sed -i "s/# server_names_hash_bucket_size.*/server_names_hash_bucket_size 64;/" /etc/nginx/nginx.conf
 
-sed -i "s/user = www-data/user = vagrant/" /etc/php5/fpm/pool.d/www.conf
-sed -i "s/group = www-data/group = vagrant/" /etc/php5/fpm/pool.d/www.conf
+sed -i "s/user = www-data/user = ubuntu/" /etc/php5/fpm/pool.d/www.conf
+sed -i "s/group = www-data/group = ubuntu/" /etc/php5/fpm/pool.d/www.conf
 
-sed -i "s/listen\.owner.*/listen.owner = vagrant/" /etc/php5/fpm/pool.d/www.conf
-sed -i "s/listen\.group.*/listen.group = vagrant/" /etc/php5/fpm/pool.d/www.conf
+sed -i "s/listen\.owner.*/listen.owner = ubuntu/" /etc/php5/fpm/pool.d/www.conf
+sed -i "s/listen\.group.*/listen.group = ubuntu/" /etc/php5/fpm/pool.d/www.conf
 sed -i "s/;listen\.mode.*/listen.mode = 0666/" /etc/php5/fpm/pool.d/www.conf
 
 service nginx restart
@@ -165,9 +172,9 @@ service php5-fpm restart
 
 # Add Vagrant User To WWW-Data
 
-usermod -a -G www-data vagrant
-id vagrant
-groups vagrant
+usermod -a -G www-data ubuntu
+id ubuntu
+groups ubuntu
 
 # Install Node
 
@@ -228,11 +235,9 @@ apt-get install -y redis-server memcached beanstalkd
 sudo sed -i "s/#START=yes/START=yes/" /etc/default/beanstalkd
 sudo /etc/init.d/beanstalkd start
 
-# Enable Swap Memory
+# Symblink `vagrant` home folder to `ubuntu` home folder
 
-/bin/dd if=/dev/zero of=/var/swap.1 bs=1M count=1024
-/sbin/mkswap /var/swap.1
-/sbin/swapon /var/swap.1
+sudo ln -s /home/ubuntu/ /home/vagrant
 
 # Minimize The Disk Image
 

@@ -4,7 +4,7 @@
       "type": "amazon-ebs",
       "region": "ap-southeast-2",
       "source_ami": "ami-3dce8b07",
-      "instance_type": "t1.micro",
+      "instance_type": "m1.medium",
       "ssh_username": "ubuntu",
       "ami_name": "packer-laravel-{{timestamp}}"
     }
@@ -13,7 +13,7 @@
     {
       "type": "atlas",
       "token": "{{user `atlas_token`}}",
-      "artifact": "angusfretwell/laravel",
+      "artifact": "inoutput/laravel",
       "artifact_type": "amazon.ami",
       "metadata": {
         "created_at": "{{timestamp}}"
@@ -23,9 +23,8 @@
   "provisioners": [
     {
       "environment_vars": [],
-      "execute_command": "echo 'vagrant'|{{.Vars}} sudo -S -E bash '{{.Path}}'",
+      "execute_command": "echo 'ubuntu'|{{.Vars}} sudo -S -E bash '{{.Path}}'",
       "scripts": [
-        "scripts/metadata.sh",
         "scripts/update.sh",
         "scripts/settler.sh"
       ],
@@ -33,6 +32,6 @@
     }
   ],
   "push": {
-    "name":"angusfretwell/laravel"
+    "name":"inoutput/laravel"
   }
 }
