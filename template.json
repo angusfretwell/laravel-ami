@@ -42,10 +42,9 @@
     }
   ],
   "variables": {
-    "metadata": "floppy/dummy_metadata.json",
+    "metadata": "floppy/dummy_metadata.json"
   },
   "push": {
     "name":"angusfretwell/laravel"
   }
 }
-
