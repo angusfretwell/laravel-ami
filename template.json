@@ -35,8 +35,6 @@
         "scripts/sshd.sh",
         "scripts/networking.sh",
         "scripts/sudoers.sh",
-        "scripts/vagrant.sh",
-        "scripts/vmtools.sh",
         "scripts/cleanup.sh",
         "scripts/minimize.sh"
       ],
@@ -44,15 +42,7 @@
     }
   ],
   "variables": {
-    "arch": "64",
-    "box_basename": "ubuntu-14.04",
-    "build_timestamp": "{{isotime \"20060102150405\"}}",
-    "git_revision": "__unknown_git_revision__",
     "metadata": "floppy/dummy_metadata.json",
-    "mirror": "http://releases.ubuntu.com",
-    "name": "ubuntu-14.04",
-    "template": "ubuntu-14.04-amd64",
-    "version": "2.0.TIMESTAMP"
   },
   "push": {
     "name":"angusfretwell/laravel"
