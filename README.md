@@ -10,7 +10,7 @@ Simply specify the AMI `ami-0f743235` in Vagrant AWS' configuration.
 
 Minimal configuration for an existing Laravel project:
 
-```
+```ruby
 config.vm.provider :aws do |aws, override|
   settings = YAML::load(File.read(homesteadYamlPath))
 
