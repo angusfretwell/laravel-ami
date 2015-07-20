@@ -32,8 +32,7 @@
       "scripts": [
         "scripts/metadata.sh",
         "scripts/update.sh",
-        "scripts/settler.sh",
-        "scripts/cleanup.sh"
+        "scripts/settler.sh"
       ],
       "type": "shell"
     }
