@@ -35,8 +35,8 @@
         "scripts/sshd.sh",
         "scripts/networking.sh",
         "scripts/sudoers.sh",
-        "scripts/cleanup.sh",
-        "scripts/minimize.sh"
+        "scripts/settler.sh",
+        "scripts/cleanup.sh"
       ],
       "type": "shell"
     }
