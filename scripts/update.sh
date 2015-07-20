@@ -1,18 +1,17 @@
-#!/bin/bash -eux
+#!/usr/bin/env bash
 
-# Update the package list
+# Update Package List
+
 apt-get update
 
-# Upgrade all installed packages incl. kernel and kernel headers
-apt-get -y upgrade linux-server linux-headers-server
+# Update Grub Bootloader
 
-# ensure the correct kernel headers are installed
-apt-get -y install linux-headers-$(uname -r)
+echo "set grub-pc/install_devices /dev/sda" | debconf-communicate
+apt-get -y remove grub-pc
+apt-get -y install grub-pc
+grub-install /dev/sda
+update-grub
 
-# update package index on boot
-cat <<EOF > /etc/init/refresh-apt.conf
-description "update package index"
-start on networking
-task
-exec /usr/bin/apt-get update
-EOF
+# Upgrade System Packages
+
+apt-get -y upgrade
