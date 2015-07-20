@@ -15,9 +15,16 @@ locale-gen en_US.UTF-8
 
 # Enable Swap Memory
 
-/bin/dd if=/dev/zero of=/var/swap.1 bs=1M count=1024
-/sbin/mkswap /var/swap.1
-/sbin/swapon /var/swap.1
+sudo fallocate -l 2G /swapfile
+sudo chmod 600 /swapfile
+sudo mkswap /swapfile
+sudo swapon /swapfile
+sudo swapon -s
+sudo echo '/swapfile   none    swap    sw    0   0' >> /etc/fstab
+sudo sysctl vm.swappiness=10
+sudo echo 'vm.swappiness=10' >> /etc/sysctl.conf
+sudo sysctl vm.vfs_cache_pressure=50
+sudo echo 'vm.vfs_cache_pressure = 50' >> /etc/sysctl.conf
 
 # Install Some PPAs
 
