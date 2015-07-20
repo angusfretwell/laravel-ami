@@ -14,14 +14,14 @@ Minimal configuration for an existing Laravel project:
 config.vm.provider :aws do |aws, override|
   settings = YAML::load(File.read(homesteadYamlPath))
 
-  # Dummy Vagrant box provided for `Vagrant AWS`
+  # Dummy Vagrant box provided for Vagrant AWS
   override.vm.box_url = "https://github.com/mitchellh/vagrant-aws/raw/master/dummy.box"
   override.vm.box = "dummy"
 
   aws.access_key_id = "MY_COOL_ACCESS_ID"
   aws.secret_access_key = "MY_COOL_ACCESS_KEY"
 
-  # Set the AMI for `laravel-ami`, and the region to Sydney
+  # Set the AMI, and the region to Sydney
   aws.ami = "ami-0f743235"
   aws.region = "ap-southeast-2"
   aws.instance_type = "t1.micro"
