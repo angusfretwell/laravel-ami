@@ -13,7 +13,7 @@
     {
       "type": "atlas",
       "token": "{{user `atlas_token`}}",
-      "artifact": "inoutput/laravel",
+      "artifact": "angusfretwell/laravel",
       "artifact_type": "amazon.ami",
       "metadata": {
         "created_at": "{{timestamp}}"
@@ -32,6 +32,6 @@
     }
   ],
   "push": {
-    "name":"inoutput/laravel"
+    "name":"angusfretwell/laravel"
   }
 }
