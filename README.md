@@ -6,6 +6,8 @@ An AMI for Laravel projects based on Homestead provisioning scripts. __Do not us
 Usage
 -----
 
+Simply specify the AMI `ami-0f743235` in Vagrant AWS' configuration.
+
 Minimal configuration for an existing Laravel project:
 
 ```
