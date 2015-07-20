@@ -22,11 +22,6 @@
   ],
   "provisioners": [
     {
-      "destination": "/tmp/metadata.json",
-      "source": "{{user `metadata`}}",
-      "type": "file"
-    },
-    {
       "environment_vars": [],
       "execute_command": "echo 'vagrant'|{{.Vars}} sudo -S -E bash '{{.Path}}'",
       "scripts": [
@@ -37,9 +32,6 @@
       "type": "shell"
     }
   ],
-  "variables": {
-    "metadata": "floppy/dummy_metadata.json"
-  },
   "push": {
     "name":"angusfretwell/laravel"
   }
